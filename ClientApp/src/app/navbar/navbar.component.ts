@@ -21,4 +21,14 @@ model: any = {};
     });
   }
 
+  loggedin() {
+    const token = localStorage.getItem('token');
+    return !!token;
+  }
+
+  logout() {
+    localStorage.removeItem('toekn');
+    console.log('Logged Out');
+  }
+
 }
