@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
 
 @NgModule({
    declarations: [
@@ -24,7 +25,8 @@ import { RegisterComponent } from './register/register.component';
       FormsModule
    ],
    providers: [
-      AuthService
+      AuthService,
+      ErrorInterceptorProvider
    ],
    bootstrap: [
       AppComponent

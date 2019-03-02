@@ -1,15 +1,19 @@
+using System.Net;
 using System.Text;
 using DatingAppV2.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using DatingAppV2.Helpers;
 
 namespace DatingAppV2
 {
@@ -59,9 +63,18 @@ namespace DatingAppV2
             }
             else
             {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                app.UseExceptionHandler(builder => {
+                    builder.Run(async context => {
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+
+                        if(error != null) {
+                            context.Response.AddApplicationError(error.Error.Message);
+                            await context.Response.WriteAsync(error.Error.Message);
+                        }
+                    });
+                });
+                //app.UseHsts();
             }
 
             //app.UseHttpsRedirection();
@@ -84,6 +97,10 @@ namespace DatingAppV2
                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                } 
+                if (env.IsProduction())
                 {
                     spa.UseAngularCliServer(npmScript: "start");
                 }
