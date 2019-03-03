@@ -1,7 +1,14 @@
-.navbar {
+/* .navbar {
   padding-top: 5px;
   padding-bottom: 5px;
 }
 nav {
   padding-bottom: 10px;
+} */
+
+.dropdown-toggle {
+  cursor: pointer;
+}
+.dropdown-item {
+  cursor: pointer;
 }
