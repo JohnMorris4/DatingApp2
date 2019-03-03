@@ -31,6 +31,7 @@ namespace DatingAppV2
         {
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             //Bindings of the different repos and the interfaces
+            services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
 
             services.AddMvc();
@@ -55,7 +56,7 @@ namespace DatingAppV2
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seed)
         {
             if (env.IsDevelopment())
             {
@@ -80,6 +81,7 @@ namespace DatingAppV2
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            // seed.SeedUsers();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseMvc(routes =>

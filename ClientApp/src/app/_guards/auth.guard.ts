@@ -9,7 +9,7 @@ import { CanActivate, Router } from '@angular/router';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router, private alert: AlertifyService) {}
   canActivate(): boolean  {
-    if (this.authService.loggedIn()){
+    if (this.authService.loggedIn()) {
       return true;
     }
     this.alert.error('You cannot get to this route');
