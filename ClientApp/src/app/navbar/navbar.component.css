@@ -12,3 +12,6 @@ nav {
 .dropdown-item {
   cursor: pointer;
 }
+.text-light1 {
+  color: white;
+}
