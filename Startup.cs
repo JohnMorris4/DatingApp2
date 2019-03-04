@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using DatingAppV2.Helpers;
+using AutoMapper;
 
 namespace DatingAppV2
 {
@@ -32,9 +33,13 @@ namespace DatingAppV2
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             //Bindings of the different repos and the interfaces
             services.AddTransient<Seed>();
+            services.AddAutoMapper();
             services.AddScoped<IAuthRepository, AuthRepository>();
-
-            services.AddMvc();
+            services.AddScoped<IDatingRepository, DatingRepository>(); 
+            services.AddMvc().AddJsonOptions(opt =>
+                { opt.SerializerSettings.ReferenceLoopHandling = 
+                Newtonsoft.Json.ReferenceLoopHandling.Ignore; 
+                });
             services.AddCors();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
