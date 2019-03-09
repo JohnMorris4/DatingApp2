@@ -12,7 +12,7 @@ export interface User {
   city: string;
   country: string;
   // optional stuff
-  interests?: string;
+  interest?: string;
   introduction?: string;
   lookingFor?: string;
   photos?: Photo[];
