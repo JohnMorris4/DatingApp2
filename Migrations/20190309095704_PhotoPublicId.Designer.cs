@@ -3,14 +3,16 @@ using System;
 using DatingAppV2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DatingAppV2.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20190309095704_PhotoPublicId")]
+    partial class PhotoPublicId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +57,7 @@ namespace DatingAppV2.Migrations
 
                     b.Property<string>("Gender");
 
-                    b.Property<string>("Interests");
+                    b.Property<string>("Interest");
 
                     b.Property<string>("Introduction");
 
