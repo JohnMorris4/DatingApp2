@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxGalleryModule} from 'ngx-gallery';
 import { AppComponent } from './app.component';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -30,6 +31,7 @@ import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { FileUploadModule } from 'ng2-file-upload';
+import { AboutComponent } from './about/about.component';
 
 
 
@@ -49,7 +51,9 @@ export function tokenGetter() {
       MemberCardComponent,
       MemberDetailComponent,
       MemberEditComponent,
-      PhotoEditorComponent
+      PhotoEditorComponent,
+      TimeAgoPipe,
+      AboutComponent
    ],
    imports: [
       BsDropdownModule.forRoot(),

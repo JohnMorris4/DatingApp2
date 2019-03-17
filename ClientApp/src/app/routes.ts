@@ -1,3 +1,4 @@
+import { AboutComponent } from './about/about.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
@@ -25,6 +26,7 @@ export const appRoutes: Routes = [
       resolve: {user: MemberEditResolver}, canDeactivate: [PreventUnsavedChanges]},
       { path: 'messages', component: MessagesComponent},
       { path: 'lists', component: ListsComponent},
+      { path: 'about', component: AboutComponent}
     ]
   },
   // The routes below are still in place to show two different examples of the same way to achive the security of
