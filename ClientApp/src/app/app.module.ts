@@ -7,7 +7,7 @@ import { AlertifyService } from './_services/alertify.service';
 import { AuthService } from './_services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxGalleryModule} from 'ngx-gallery';
 import { AppComponent } from './app.component';
 
@@ -16,7 +16,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
-import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { MemberListComponent } from './members/member-list/member-list.component';
 
 import { ListsComponent } from './lists/lists.component';
@@ -53,8 +53,10 @@ export function tokenGetter() {
    ],
    imports: [
       BsDropdownModule.forRoot(),
+      BsDatepickerModule.forRoot(),
       BrowserModule,
       FileUploadModule,
+      ReactiveFormsModule,
       HttpClientModule,
       TabsModule.forRoot(),
       FormsModule,
