@@ -1,4 +1,4 @@
-import { Pagination } from './../../_models/pagination';
+import { Pagination, PaginatedResult } from './../../_models/pagination';
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from './../../_services/alertify.service';
 import { Component, OnInit } from '@angular/core';
@@ -28,20 +28,31 @@ export class MemberListComponent implements OnInit {
       this.users = data['users'].result;
       this.pagination = data['users'].pagination;
     });
+    this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';
+    this.userParams.minAge = 18;
+    this.userParams.maxAge = 70;
+    this.userParams.orderBy = 'lastActive';
   }
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
-    console.log(this.pagination.currentPage);
+    this.loadUsers();
   }
 
-  // loadUsers() {
-  //   this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
-  //     .subscribe((res: PaginatedResult<User[]>) => {
-  //       this.users = res.result;
-  //       this.pagination = res.pagination;
-  //     }, error => {
-  //       this.alertify.error(error);
-  //     });
-  // }
+  resetFilters() {
+    this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';
+    this.userParams.minAge = 18;
+    this.userParams.maxAge = 70;
+    this.loadUsers();
+  }
+
+  loadUsers() {
+    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
+      .subscribe((res: PaginatedResult<User[]>) => {
+        this.users = res.result;
+        this.pagination = res.pagination;
+      }, error => {
+        this.alertify.error(error);
+      });
+  }
 
 }
