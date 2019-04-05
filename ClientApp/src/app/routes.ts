@@ -12,6 +12,7 @@ import { Routes } from '@angular/router';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
+import { ListsResolver } from './_resolvers/lists.resolver';
 
 export const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -25,7 +26,7 @@ export const appRoutes: Routes = [
       { path: 'member/edit', component: MemberEditComponent,
       resolve: {user: MemberEditResolver}, canDeactivate: [PreventUnsavedChanges]},
       { path: 'messages', component: MessagesComponent},
-      { path: 'lists', component: ListsComponent},
+      { path: 'lists', component: ListsComponent, resolve: {users: ListsResolver}},
       { path: 'about', component: AboutComponent}
     ]
   },

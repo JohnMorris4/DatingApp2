@@ -1,3 +1,4 @@
+import { ListsResolver } from './_resolvers/lists.resolver';
 import { PhotoEditorComponent } from './members/PhotoEditor/PhotoEditor.component';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
@@ -84,6 +85,7 @@ export function tokenGetter() {
       PreventUnsavedChanges,
       UserService,
       MemberDetailResolver,
+      ListsResolver,
       MemberListResolver,
       MemberEditResolver
    ],
